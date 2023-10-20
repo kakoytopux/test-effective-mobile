@@ -8,7 +8,7 @@ const {
 } = process.env;
 
 const sequelize = new Sequelize(
-  'users_history',
+  'users',
   DB_NAME,
   DB_PASSWORD,
   {
