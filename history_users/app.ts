@@ -1,15 +1,15 @@
-const express = require('express');
-const { errors } = require('celebrate'); 
-require('dotenv').config();
+import express, { Express, Request, Response } from 'express';
+import { errors } from 'celebrate';
+import historyRouter from './routes/history';
 
 const { PORT = 3001 } = process.env;
-const app = express();
+const app: Express = express();
 
 app.use(express.json());
 
-app.use('/history', require('./routes/history'));
+app.use('/history', historyRouter);
 
-app.use('*', (req: any, res: any) => {
+app.use('*', (req: Request, res: Response): void => {
   res.status(404).send({ 'message': 'Маршрут не найден.' });
 });
 

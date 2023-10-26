@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize');
-const db = require('../middlewares/db');
+import { DataTypes } from 'sequelize';
+import sequelize from '../middlewares/db';
 
-const history = db.define('history', {
+const History = sequelize.define('history', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -13,6 +13,6 @@ const history = db.define('history', {
   }
 });
 
-history.sync();
+History.sync();
 
-module.exports = history;
+export default History;

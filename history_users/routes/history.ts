@@ -1,6 +1,8 @@
-const router = require('express').Router();
-const { addHistoryUser, getHistoryUser } = require('../controllers/history');
-const { Joi, celebrate } = require('celebrate');
+import { Router } from 'express';
+import { addHistoryUser, getHistoryUser } from '../controllers/history';
+import { Joi, celebrate } from 'celebrate';
+
+const router: Router = Router();
 
 router.post('/', celebrate({
   body: Joi.object().keys({
@@ -13,4 +15,4 @@ router.get('/:id', celebrate({
   })
 }), getHistoryUser);
 
-module.exports = router;
+export default router;

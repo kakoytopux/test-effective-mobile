@@ -1,21 +1,15 @@
-const History = require('../models/history');
+import { Request, Response } from 'express';
+import History from '../models/history';
 
-module.exports.addHistoryUser = (req: any, res: any) => {
+export const addHistoryUser = (req: Request, res: Response) => {
   const { data } = req.body;
   
   History.create({ history: data })
-  .then((data: any) => res.send(data))
-  .catch((err: any) => {
-    if(err.errors.find((item: any) => item.validatorKey === 'is_null')) {
-      res.status(400).send({ 'message': 'Необходимо заполнить все поля.' });
-      return;
-    }
-
-    res.status(500).send({ 'message': 'Непредвиденная ошибка.' });
-  })
+  .then((data: {[key: string]: any}) => res.send(data))
+  .catch(() => res.status(500).send({ 'message': 'Непредвиденная ошибка.' }))
 }
 
-module.exports.getHistoryUser = (req: any, res: any) => {
+export const getHistoryUser = (req: Request, res: Response) => {
   const { id } = req.params;
 
   History.findAll({
@@ -25,6 +19,6 @@ module.exports.getHistoryUser = (req: any, res: any) => {
       }
     }
   })
-  .then((data: any) => res.send(data))
+  .then((data: {[key: string]: any}) => res.send(data))
   .catch(() => res.status(500).send({ 'message': 'Непредвиденная ошибка.' }))
 }
